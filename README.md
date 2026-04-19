@@ -158,4 +158,4 @@ Check the Umbraco logs for an `Error` entry — it includes the full Brevo error
 
 ## License
 
-MIT © Jebastine Antony
+MIT
