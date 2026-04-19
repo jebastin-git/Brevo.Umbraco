@@ -1,0 +1,46 @@
+I have completed implementation of Brevo.Umbraco (Umbraco 17, .NET 10).
+
+Now finalize the package for production and publishing.
+
+Tasks:
+
+Review project for production readiness:
+Logging clarity (include email, recordId, field alias where relevant)
+Avoid noisy logs
+Ensure exception messages are actionable
+Validate workflow UX:
+Add clear descriptions for:
+EmailField
+FieldMapping (include example format)
+ListIds (comma-separated explanation)
+Ensure settings are user-friendly in Umbraco backoffice
+Validate mapping:
+Ensure null/empty values are skipped
+Ensure multi-value fields are handled safely
+Validate service:
+Ensure api-key header is set correctly once
+Ensure attributes dictionary is not modified by serializer
+Ensure response body is logged before throwing
+Packaging:
+Verify .csproj metadata:
+PackageId
+Version (use 1.0.0)
+Description
+Tags (umbraco, umbraco-forms, brevo, sendinblue, integration)
+Ensure icon is correctly referenced:
+brevo-workflow-logo.png inside /assets
+included in package
+Ensure README is linked
+README improvements:
+Add a “Common Issues” section:
+Contact not added to list → check ListIds
+No contact created → check EmailField alias
+Attributes not mapping → check FieldMapping format
+Keep everything simple:
+Do not introduce new layers
+Do not refactor architecture
+
+Output:
+
+List of improvements made
+Updated snippets (only where necessary)

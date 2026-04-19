@@ -1,0 +1,41 @@
+# Build output
+bin/
+obj/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.nuget.cache
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# Claude
+.claude/
+
+# dotnet tools
+.config/dotnet-tools.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Secrets — never commit real API keys
+appsettings.Development.json
+appsettings.Production.json
+secrets.json

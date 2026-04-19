@@ -1,0 +1,37 @@
+Using the finalized architecture and service design:
+
+Design ONLY the workflow and mapping logic.
+
+Constraints:
+
+Workflow:
+Implements Umbraco Forms workflow
+Contains settings as properties (no separate settings class)
+Settings:
+EmailField (required)
+FieldMapping (string, multi-line: BREVO_FIELD:formFieldAlias)
+Mapping:
+Use a simple parser helper (no service layer)
+Parse FieldMapping into key-value pairs
+Extract values directly from the form record
+Workflow responsibility:
+Read form record
+Extract email
+Build BrevoContactRequest
+Call IBrevoService
+Error handling:
+Catch exceptions from service
+Log error
+Return WorkflowExecutionStatus.Failed
+Keep it simple:
+No extra abstraction layers
+No unnecessary classes
+
+Explain:
+
+Workflow structure
+Settings handling in Umbraco Forms
+Mapping execution flow
+Validation strategy (missing email, invalid mapping)
+
+Do NOT write code yet.

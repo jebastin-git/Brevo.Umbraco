@@ -1,0 +1,20 @@
+Prepare Brevo.Umbraco for NuGet and Umbraco Marketplace.
+
+Include:
+
+README.md
+What it does
+How to install
+appsettings.json example
+Workflow setup steps
+Field mapping examples
+ListIds usage
+NuGet metadata
+Package description
+Tags
+Versioning strategy
+Icon suggestions (modern, minimal)
+Usage example:
+Form fields → Brevo attributes mapping
+
+Keep it concise, developer-friendly, and production-ready.

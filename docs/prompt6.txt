@@ -1,0 +1,33 @@
+Using the finalized architecture and service implementation:
+
+Implement the Umbraco Forms workflow:
+
+Name: SendToBrevoWorkflow
+
+Requirements:
+
+Inherit from WorkflowType
+Settings (as properties with [Setting]):
+EmailField (required)
+FieldMapping (multi-line string)
+Execution flow:
+Read email using EmailField alias
+If missing → log warning → return Failed
+Parse FieldMapping using helper
+Build attributes dictionary
+Skip null/empty values
+Create BrevoContactRequest
+Call IBrevoService
+Error handling:
+Catch exceptions from service
+Log error (include email)
+Return Failed
+Logging:
+Warning for missing email
+Warning for invalid mapping lines
+Error for API failures
+Keep it simple:
+No extra abstraction layers
+No unnecessary classes
+
+Explain briefly, then provide code.

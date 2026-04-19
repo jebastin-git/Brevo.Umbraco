@@ -1,0 +1,24 @@
+Review the current Brevo.Umbraco implementation and improve production readiness.
+
+Focus on:
+
+Logging improvements:
+Include context (email, record id, field alias)
+Avoid noisy logs
+Validation:
+Ensure missing email is clearly logged
+Ensure mapping errors are informative but not spammy
+ListIds support:
+Add optional ListId setting (single or multiple)
+Ensure contacts are added to list
+Edge cases:
+Handle multi-value form fields safely
+Ensure attributes dictionary is robust
+Code clarity:
+Keep it simple
+Avoid over-engineering
+
+Do NOT redesign architecture.
+Do NOT add new layers.
+
+Only refine the existing implementation.

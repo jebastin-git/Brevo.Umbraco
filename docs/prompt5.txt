@@ -1,0 +1,28 @@
+Using the finalized service design:
+
+Implement ONLY the Brevo service layer.
+
+Constraints:
+
+.NET 10
+Typed HttpClient (injected, not created manually)
+Use IOptions<BrevoSettings>
+Method:
+CreateOrUpdateContactAsync(BrevoContactRequest, CancellationToken)
+
+Requirements:
+
+POST to /v3/contacts
+Set api-key header
+Serialize request as JSON
+Log:
+Trace before sending
+Information on success
+Error on failure (include response body)
+On non-success:
+Read response body
+Throw HttpRequestException with useful message
+
+Do NOT implement workflow or mapping.
+
+Explain briefly, then provide code.

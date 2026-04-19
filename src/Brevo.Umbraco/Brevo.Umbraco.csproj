@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- Package identity -->
+    <PackageId>Brevo.Umbraco</PackageId>
+    <Version>1.0.4</Version>
+    <Authors>Jebastine Antony</Authors>
+    <Company>Jebastine Antony</Company>
+    <Copyright>Copyright © 2026 Jebastine Antony</Copyright>
+
+    <!-- Marketplace / NuGet discovery -->
+    <Title>Brevo for Umbraco Forms</Title>
+    <Description>Umbraco Forms workflow that creates or updates Brevo (Sendinblue) contacts on form submission. Supports field mapping, list assignment, and multi-value fields.</Description>
+    <PackageTags>umbraco;umbraco-forms;brevo;sendinblue;email-marketing;crm;workflow;integration;umbraco-marketplace</PackageTags>
+    <PackageProjectUrl>https://github.com/jebastin-net/Brevo.Umbraco</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jebastin-net/Brevo.Umbraco</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!-- Docs and license -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+    <PackageIcon>brevo-workflow-logo.png</PackageIcon>
+
+    <!-- Release notes location (optional, CI can inject this) -->
+    <!-- <PackageReleaseNotes>See CHANGELOG.md</PackageReleaseNotes> -->
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Core" Version="17.3.4" />
+    <PackageReference Include="Umbraco.Forms.Core" Version="17.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="assets\brevo-workflow-logo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
