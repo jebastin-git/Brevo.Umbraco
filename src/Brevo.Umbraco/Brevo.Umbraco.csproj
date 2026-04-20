@@ -9,11 +9,11 @@
 
     <!-- Package identity -->
     <PackageId>Brevo.Umbraco</PackageId>
-    <Version>1.0.6</Version>
-    <Authors>Jebastine Antony</Authors>
-    <Owners>Jebastine Antony</Owners>
-    <Company>Jebastine Antony</Company>
-    <Copyright>Copyright © 2026 Jebastine Antony</Copyright>
+    <Version>1.0.7</Version>
+    <Authors>Jebastin Jeyaraj</Authors>
+    <Owners>Jebastin Jeyaraj</Owners>
+    <Company>Jebastin Jeyaraj</Company>
+    <Copyright>Copyright © 2026 Jebastin Jeyaraj</Copyright>
 
     <!-- NuGet / Marketplace discovery -->
     <Title>Brevo for Umbraco Forms</Title>
@@ -29,6 +29,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>
+      1.0.7 — Updated package owner name to Jebastin Jeyaraj.
       1.0.6 — Removed author attribution from README license section.
       1.0.5 — Added umbraco-marketplace.json, fixed repository URLs, added NeutralLanguage and Owners metadata.
       1.0.4 — Added startup guard for missing API key; icon changed to icon-paper-plane.

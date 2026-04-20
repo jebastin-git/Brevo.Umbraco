@@ -4,7 +4,7 @@
   "Description": "Umbraco Forms workflow that creates or updates Brevo (Sendinblue) contacts on form submission. Supports field attribute mapping, list assignment, multi-value fields, structured logging, and startup validation.",
   "PackageType": "Integration",
   "AuthorDetails": {
-    "Name": "Jebastine Antony",
+    "Name": "Jebastin Jeyaraj",
     "Url": "https://github.com/jebastin-git",
     "SyncContributorsFromRepository": true
   },
