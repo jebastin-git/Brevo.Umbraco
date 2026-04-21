@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Brevo.Umbraco.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Brevo.Umbraco.Services;
 
@@ -16,10 +17,12 @@ public sealed class BrevoService : IBrevoService
 
     private readonly HttpClient _httpClient;
     private readonly ILogger<BrevoService> _logger;
+    private readonly BrevoSettings _settings;
 
-    public BrevoService(HttpClient httpClient, ILogger<BrevoService> logger)
+    public BrevoService(HttpClient httpClient, IOptions<BrevoSettings> options, ILogger<BrevoService> logger)
     {
         _httpClient = httpClient;
+        _settings = options.Value;
         _logger = logger;
     }
 
@@ -29,6 +32,8 @@ public sealed class BrevoService : IBrevoService
             request.Email, request.Attributes.Count, request.ListIds.Count);
 
         using var message = new HttpRequestMessage(HttpMethod.Post, "contacts");
+        message.Headers.Add("api-key", _settings.ApiKey);
+        message.Headers.Accept.ParseAdd("application/json");
         message.Content = JsonContent.Create(request, options: SerializerOptions);
 
         using var response = await _httpClient.SendAsync(message, ct);

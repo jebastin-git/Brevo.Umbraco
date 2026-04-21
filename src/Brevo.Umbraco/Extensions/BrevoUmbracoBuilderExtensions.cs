@@ -1,7 +1,6 @@
 using Brevo.Umbraco.Models;
 using Brevo.Umbraco.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.DependencyInjection;
 
 namespace Brevo.Umbraco.Extensions;
@@ -12,15 +11,15 @@ public static class BrevoUmbracoBuilderExtensions
 
     public static IUmbracoBuilder AddBrevo(this IUmbracoBuilder builder)
     {
+        if (builder.Services.Any(s => s.ServiceType == typeof(IBrevoService)))
+            return builder;
+
         builder.Services.Configure<BrevoSettings>(
             builder.Config.GetSection("Brevo"));
 
-        builder.Services.AddHttpClient<IBrevoService, BrevoService>((sp, client) =>
+        builder.Services.AddHttpClient<IBrevoService, BrevoService>(client =>
         {
-            var settings = sp.GetRequiredService<IOptions<BrevoSettings>>().Value;
             client.BaseAddress = new Uri(BrevoBaseUrl);
-            client.DefaultRequestHeaders.Add("api-key", settings.ApiKey);
-            client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
         });
 
         return builder;

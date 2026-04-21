@@ -20,17 +20,7 @@ An Umbraco Forms workflow that creates or updates [Brevo](https://www.brevo.com)
 dotnet add package Brevo.Umbraco
 ```
 
-Register in `Program.cs`:
-
-```csharp
-builder.CreateUmbracoBuilder()
-    .AddBackOffice()
-    .AddWebsite()
-    .AddDeliveryApi()
-    .AddComposers()
-    .AddBrevo()   // ← add this
-    .Build();
-```
+No `Program.cs` changes needed — the package auto-registers via Umbraco's composer system when `.AddComposers()` is present (which is the default in all Umbraco projects).
 
 ---
 
