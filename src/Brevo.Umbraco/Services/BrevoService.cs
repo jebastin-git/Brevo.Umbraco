@@ -54,4 +54,33 @@ public sealed class BrevoService : IBrevoService
         _logger.LogInformation("Brevo contact created/updated {Email} [{StatusCode}]",
             request.Email, (int)response.StatusCode);
     }
+
+    public async Task CreateDoubleOptInContactAsync(BrevoDoubleOptInContactRequest request, CancellationToken ct = default)
+    {
+        _logger.LogTrace("Sending Double opt-in (DOI) contact to Brevo {Email} ({AttributeCount} attributes, {IncludeListCount} include lists, {ExcludeListCount} exclude lists)",
+            request.Email, request.Attributes.Count, request.IncludeListIds.Count, request.ExcludeListIds.Count);
+
+        using var message = new HttpRequestMessage(HttpMethod.Post, "contacts/doubleOptinConfirmation");
+        message.Headers.Add("api-key", _settings.ApiKey);
+        message.Headers.Accept.ParseAdd("application/json");
+        message.Content = JsonContent.Create(request, options: SerializerOptions);
+
+        using var response = await _httpClient.SendAsync(message, ct);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var body = await response.Content.ReadAsStringAsync(ct);
+
+            _logger.LogError("Brevo API rejected contact {Email} [{StatusCode}]: {ResponseBody}",
+                request.Email, (int)response.StatusCode, body);
+
+            throw new HttpRequestException(
+                $"Brevo API returned {(int)response.StatusCode} for {request.Email}: {body}",
+                inner: null,
+                statusCode: response.StatusCode);
+        }
+
+        _logger.LogInformation("Brevo Double opt-in (DOI) contact requested {Email} [{StatusCode}]",
+            request.Email, (int)response.StatusCode);
+    }
 }
