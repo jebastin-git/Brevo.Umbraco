@@ -27,6 +27,12 @@ public sealed class SendToBrevoWorkflow : WorkflowType
         Description = "Comma-separated numeric Brevo list IDs. The contact will be added to each list. Find IDs in Brevo under Contacts → Lists. Optional — leave empty to create the contact without list assignment. Example: 3,7,12")]
     public string ListIds { get; set; } = string.Empty;
 
+    [Setting("Double Opt-In (DOI)",
+        Alias = "DoubleOptIn",
+        View = "Umb.PropertyEditorUi.Toggle",
+        Description = "Create Contact via DOI (Double-Opt-In) flow.")]
+    public string DoubleOptIn { get; set; } = string.Empty;
+
     public SendToBrevoWorkflow(IBrevoService brevoService, ILogger<SendToBrevoWorkflow> logger)
     {
         _brevoService = brevoService;
@@ -70,24 +76,49 @@ public sealed class SendToBrevoWorkflow : WorkflowType
                 attributes[mapping.BrevoAttributeName] = value;
         }
 
-        var request = new BrevoContactRequest
+        if (!string.IsNullOrEmpty(DoubleOptIn) && DoubleOptIn.Equals("true", StringComparison.OrdinalIgnoreCase))
         {
-            Email = email,
-            Attributes = attributes,
-            ListIds = ParseListIds(record.Id),
-        };
+            var request = new BrevoDoubleOptInContactRequest
+            {
+                Email = email,
+                Attributes = attributes,
+                IncludeListIds = ParseListIds(record.Id).ConvertAll(x => (long)x),
+            };
 
-        try
-        {
-            await _brevoService.CreateOrUpdateContactAsync(request);
-            return WorkflowExecutionStatus.Completed;
+            try
+            {
+                await _brevoService.CreateDoubleOptInContactAsync(request);
+                return WorkflowExecutionStatus.Completed;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,
+                    "SendToBrevoWorkflow: failed to create Brevo Double opt-in (DOI) contact {Email} on record {RecordId}",
+                    email, record.Id);
+                return WorkflowExecutionStatus.Failed;
+            }
         }
-        catch (Exception ex)
+        else
         {
-            _logger.LogError(ex,
-                "SendToBrevoWorkflow: failed to create/update Brevo contact {Email} on record {RecordId}",
-                email, record.Id);
-            return WorkflowExecutionStatus.Failed;
+            var request = new BrevoContactRequest
+            {
+                Email = email,
+                Attributes = attributes,
+                ListIds = ParseListIds(record.Id),
+            };
+
+            try
+            {
+                await _brevoService.CreateOrUpdateContactAsync(request);
+                return WorkflowExecutionStatus.Completed;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,
+                    "SendToBrevoWorkflow: failed to create/update Brevo contact {Email} on record {RecordId}",
+                    email, record.Id);
+                return WorkflowExecutionStatus.Failed;
+            }
         }
     }
 
