@@ -10,12 +10,6 @@ public class BrevoComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
-        var apiKey = builder.Config["Brevo:ApiKey"];
-        if (string.IsNullOrWhiteSpace(apiKey))
-            throw new InvalidOperationException(
-                "Brevo:ApiKey is not configured. Add it to appsettings.json: " +
-                "{ \"Brevo\": { \"ApiKey\": \"xkeysib-...\" } }");
-
         builder.AddBrevo();
 
         builder.WithCollectionBuilder<WorkflowCollectionBuilder>()

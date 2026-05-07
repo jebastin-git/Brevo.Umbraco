@@ -1,8 +1,8 @@
-using System.Net.Http.Json;
-using System.Text.Json;
 using Brevo.Umbraco.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Brevo.Umbraco.Services;
 
@@ -24,6 +24,13 @@ public sealed class BrevoService : IBrevoService
         _httpClient = httpClient;
         _settings = options.Value;
         _logger = logger;
+
+        if (string.IsNullOrWhiteSpace(_settings.ApiKey))
+        {
+            throw new InvalidOperationException(
+                "Brevo:ApiKey is not configured. Add it to appsettings.json: " +
+                "{ \"Brevo\": { \"ApiKey\": \"xkeysib-...\" } }");
+        }
     }
 
     public async Task CreateOrUpdateContactAsync(BrevoContactRequest request, CancellationToken ct = default)
