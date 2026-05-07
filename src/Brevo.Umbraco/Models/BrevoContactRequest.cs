@@ -12,4 +12,7 @@ public sealed class BrevoContactRequest
 
     [JsonPropertyName("listIds")]
     public List<int> ListIds { get; set; } = [];
+
+    [JsonPropertyName("updateEnabled")]
+    public bool UpdateEnabled { get; set; };
 }

@@ -28,8 +28,8 @@ public sealed class BrevoService : IBrevoService
 
     public async Task CreateOrUpdateContactAsync(BrevoContactRequest request, CancellationToken ct = default)
     {
-        _logger.LogTrace("Sending contact to Brevo {Email} ({AttributeCount} attributes, {ListCount} lists)",
-            request.Email, request.Attributes.Count, request.ListIds.Count);
+        _logger.LogTrace("Sending contact to Brevo {Email} ({AttributeCount} attributes, {ListCount} lists, UpdateEnabled: {UpdateEnabled})",
+            request.Email, request.Attributes.Count, request.ListIds.Count, request.UpdateEnabled);
 
         using var message = new HttpRequestMessage(HttpMethod.Post, "contacts");
         message.Headers.Add("api-key", _settings.ApiKey);

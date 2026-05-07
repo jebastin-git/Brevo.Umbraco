@@ -75,6 +75,7 @@ public sealed class SendToBrevoWorkflow : WorkflowType
             Email = email,
             Attributes = attributes,
             ListIds = ParseListIds(record.Id),
+            UpdateEnabled = true
         };
 
         try
